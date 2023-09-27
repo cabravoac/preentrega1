@@ -1,51 +1,69 @@
-consultaClima()
-
-function consultaClima(){
-
-    const datosClima = [
+function consultaClima() {
+    const ciudades = [
         {
-            ciudad: "CDMX",
-            abreviatura:"CDMX",
+            nombre: "CDMX",
+            abreviatura: "CDMX",
+        },
+        {
+            nombre: "Bruselas",
+            abreviatura: "BRU",
+        },
+        {
+            nombre: "Tokio",
+            abreviatura: "TK",
+        },
+        {
+            nombre: "Vancouver",
+            abreviatura: "VAN",
+        },
+        {
+            nombre: "Chicago",
+            abreviatura: "CHI",
+        }
+    ];
+
+    const datosClima = {
+        CDMX: {
             temperatura: 20,
             velocidadViento: 150,
         },
-        {
-            ciudad: "Bruselas",
-            abreviatura:"BRU",
+        BRU: {
             temperatura: 25,
             velocidadViento: 120,
         },
-        {
-            ciudad: "Tokio",
-            abreviatura:"TK",
+        TK: {
             temperatura: 28,
             velocidadViento: 100,
         },
-        {
-            ciudad: "Vancouver",
-            abreviatura:"VAN",
+        VAN: {
             temperatura: 18,
             velocidadViento: 80,
         },
-        {
-            ciudad: "Chicago",
-            abreviatura:"CHI",
+        CHI: {
             temperatura: 30,
             velocidadViento: 200,
         }
-    ]
+    };
 
-    let continuar = confirm("¿Te interesa saber el estado del clima en donde estás?")
+    let continuar = confirm("¿Te interesa saber el estado del clima en donde estás?");
 
-    while(continuar){        
+    while (continuar) {
         let nombreUsuario = prompt("Ingresa tu nombre").toUpperCase()
-        let ciudadIngresada = prompt("¿En qué ciudad vives? P.ej; CDMX,BRU,TK,VAN,CHI").toUpperCase()
-        console.log(ciudadIngresada)
-        let ciudadEncontrada = datosClima.find(dato => dato.abreviatura == ciudadIngresada)
-        alert("Hola!! " + nombreUsuario + " la temperatura en " + ciudadEncontrada.ciudad + " es de " + ciudadEncontrada.temperatura + " grados con vientos de " + ciudadEncontrada.velocidadViento + "km/h")
-        
-        continuar = confirm("¿Te interesa saber el estado del clima en donde estás?")
+        let abreviaturaIngresada = prompt("¿En qué ciudad vives? P.ej; CDMX, BRU, TK, VAN, CHI").toUpperCase()
 
-    } 
+        if (abreviaturaIngresada in datosClima) {
+            const ciudad = ciudades.find(ciudad => ciudad.abreviatura === abreviaturaIngresada);
+            const clima = datosClima[abreviaturaIngresada];
+
+            alert(`Hola, ${nombreUsuario}. La temperatura en ${ciudad.nombre} es de ${clima.temperatura} grados con vientos de ${clima.velocidadViento} km/h`);
+        } else {
+            alert("La abreviatura de la ciudad ingresada no es válida. Por favor, ingresa una de las siguientes opciones: CDMX, BRU, TK, VAN, CHI.");
+        }
+
+        continuar = confirm("¿Te interesa saber el estado del clima en donde estás?")
+    }
+
     alert("Gracias por visitarnos, vuelva pronto")
-} 
+}
+
+consultaClima();
